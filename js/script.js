@@ -1,5 +1,8 @@
 $( function() {
 
+    const url = 'http://localhost:3000';
+    const testPlan = '5e3a2fafd1641533227c45f7';
+
     if(localStorage.items){
         const items = JSON.parse(localStorage.items)
         $('#classList').html(items);
@@ -22,7 +25,7 @@ $( function() {
     $( "#classList" ).disableSelection();
 
     $('.card').dblclick(function(){
-        const newTitle = prompt('New Topic');
+        const newTitle = prompt('New Topic', $(this).text());
         if (newTitle === null) {
             return; //break out of the function early
         }
@@ -31,14 +34,58 @@ $( function() {
 
     setInterval(function(){
         const items = JSON.stringify($('#classList').html());
+        updateToMongo($('#classList').html().trim());
         localStorage.setItem('items', items);
-    }, 300000);
-    //autosave every 5 minutes
+        console.log('autosaved at ' +  new Date($.now()));
+    }, 60000);
+    //autosave every minute
 
 
     $('#saveBtn').click(function(e){
         e.preventDefault();
         const items = JSON.stringify($('#classList').html());
+        addToMongo($('#classList').html().trim());
         localStorage.setItem('items', items);
     });
+
+
+
+    addToMongo = (data) => {
+        if(testPlan){
+            updateToMongo($('#classList').html().trim());
+        } else {
+            $.ajax({
+                url: `${url}/addPlanner`,
+                type: 'POST',
+                data: {
+                    itemString: data
+                },
+                success:function(success){
+                    console.log(success);
+                },
+                error:function(error){
+                    console.log(error);
+                    console.log('something went wrong with sending the data');
+                }
+            })
+        }
+
+    }
+
+    updateToMongo = (data) => {
+        $.ajax({
+            url: `${url}/updatePlan/${testPlan}`,
+            type: 'PATCH',
+            data: {
+                itemString: data
+            },
+            success:function(success){
+                console.log(success);
+            },
+            error:function(error){
+                console.log(error);
+                console.log('something went wrong with sending the data');
+            }
+        })
+    }
 } );
