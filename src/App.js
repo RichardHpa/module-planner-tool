@@ -2,12 +2,11 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route 
 } from "react-router-dom";
 import './App.css';
 
-import Authentication from './Components/Authentication';
+import Authentication from './components/Authentication';
 
 function App() {
   return (
@@ -25,15 +24,3 @@ function App() {
 }
 
 export default App;
-
-function Home() {
-  return <h1>Planner</h1>;
-}
-
-function About() {
-  return <h1>About</h1>;
-}
-
-function Users() {
-  return <h1>Users</h1>;
-}
