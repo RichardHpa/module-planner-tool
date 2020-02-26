@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './authentication.scss';
+import axios from 'axios';
 
 class Authentication extends Component {
     constructor (props) {
@@ -17,8 +18,12 @@ class Authentication extends Component {
     }
 
     handleSubmit = (values, type) => {
-        console.log(values);
-        console.log(type);
+        // console.log(values);
+        // console.log(type);
+        // axios.post('')
+        //     .them()
+        //
+        // }
     }
 
     render(){
@@ -37,6 +42,7 @@ class Authentication extends Component {
                     <Register
                         containerRef={ref => (this.current = ref)}
                         onClick={this.changeTab}
+                        submitForm={this.handleSubmit}
                     />
                 )}
                 </div>
@@ -119,7 +125,14 @@ class Register extends Component {
     }
 
     submit = () => {
+        const values = {
+            name: this.state.name,
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        }
 
+        this.props.submitForm(values, 'Register');
     }
 
     render(){
