@@ -1,57 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './authentication.scss';
-import axios from 'axios';
 
-import {useSelector, useDispatch} from 'react-redux';
-import { login, logout} from '../../actions';
+import {useDispatch} from 'react-redux';
+import { login } from '../../actions';
 
-class Authentication extends Component {
-    constructor (props) {
-        super(props)
+function Authentication(){
+    const dispatch = useDispatch();
 
-        this.state = {
-            isLoggingIn: true
-        }
+    const [loggedInTab, changeTab] = useState(true);
+
+    const handleChangeTab = () => {
+        changeTab(!loggedInTab)
     }
 
-    changeTab = () => {
-        this.setState({
-            isLoggingIn: !this.state.isLoggingIn
-        })
+    const handleOnSubmit = () => {
+        dispatch(login())
     }
 
-    handleSubmit = (values, type) => {
-        // console.log(values);
-        // console.log(type);
-        // axios.post('')
-        //     .them()
-        //
-        // }
-    }
-
-    render(){
-        const { isLoggingIn } = this.state;
-        return (
-            <div className="authForm">
-                <div className="container" ref={ref => (this.container = ref)}>
-                {isLoggingIn && (
-                    <Login
-                        containerRef={ref => (this.current = ref)}
-                        onClick={this.changeTab}
-                        submitForm={this.handleSubmit}
-                    />
-                )}
-                {!isLoggingIn && (
-                    <Register
-                        containerRef={ref => (this.current = ref)}
-                        onClick={this.changeTab}
-                        submitForm={this.handleSubmit}
-                    />
-                )}
-                </div>
+    return(
+        <div className="authForm">
+            <div className="container">
+            {loggedInTab && (
+                <Login
+                    onClick={handleChangeTab}
+                    onSubmit={handleOnSubmit}
+                />
+            )}
+            {!loggedInTab && (
+                <Register
+                    onClick={handleChangeTab}
+                />
+            )}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Authentication;
@@ -79,7 +61,7 @@ class Login extends Component {
             password: this.state.password
         }
 
-        this.props.submitForm(values, 'login');
+        this.props.onSubmit(values, 'login');
     }
 
     render(){
@@ -135,7 +117,7 @@ class Register extends Component {
             password: this.state.password
         }
 
-        this.props.submitForm(values, 'Register');
+        this.props.onSubmit(values, 'Register');
     }
 
     render(){

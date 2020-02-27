@@ -1,0 +1,65 @@
+.authForm{
+    width: 500px;
+    height: 90vh;
+    background-color: #36485f;
+    color: white;
+    box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
+    padding: 40px;
+    .container{
+        height: 100%;
+    }
+
+    .loginFrom{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        h2{
+            font-size: 24px;
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #199187;
+        }
+
+        input{
+            margin-bottom: 30px;
+            color: white;
+            border: 0;
+            border-bottom: 1px solid #f8f8f8;
+            width: 100%;
+            height: 40px;
+            background-color: transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+    line-height: 1.5;
+        }
+
+        ::placeholder {
+          color: white;
+          opacity: 0.8;
+        }
+
+        .btnLogin{
+            background-color: #59cbbd;
+            font-size: 1.25rem;
+        }
+
+    }
+}
+
+.inputGroup{
+    margin-bottom: 1rem;
+}
+
+.btn{
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+}
