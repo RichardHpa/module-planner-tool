@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './authentication.scss';
 import axios from 'axios';
 
+import {useSelector, useDispatch} from 'react-redux';
+import { login, logout} from '../../actions';
+
 class Authentication extends Component {
     constructor (props) {
         super(props)

@@ -2,11 +2,11 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route 
+  Route
 } from "react-router-dom";
 import './App.css';
 
-import Authentication from './components/Authentication';
+import Authentication from './Components/Authentication';
 
 function App() {
   return (
